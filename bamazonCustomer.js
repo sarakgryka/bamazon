@@ -46,9 +46,9 @@ function showProducts() {
             console.log(`Price: $ ${results[i].price}`);
             console.log("*********************************")
 
-           
+
         }
-       
+
         askQuestions();
     })
 
@@ -59,48 +59,48 @@ function showProducts() {
 
 
 // call to inquirer to prompt messages to customer//
-function askQuestions(){
-inquirer
-    .prompt([
-        {
-            type: "inpt",
-            name: "itemID",
-            message: "Please enter the ID item of the product you would like to order"
-        },
-        {
-            type: "inpt",
-            name: "quantity",
-            message: "Please enter the quantity you would like to order"
-        },
+function askQuestions() {
+    inquirer
+        .prompt([
+            {
+                type: "inpt",
+                name: "itemID",
+                message: "Please enter the ID item of the product you would like to order"
+            },
+            {
+                type: "inpt",
+                name: "quantity",
+                message: "Please enter the quantity you would like to order"
+            },
 
 
-    ])
-    .then(answers => {
-       
-// console.log(answers);
+        ])
+        .then(answers => {
 
-updateProducts(answers);
+            // console.log(answers);
 
-
-
+            updateProducts(answers);
 
 
 
 
 
 
-    })
-   
+
+
+
+        })
+
 };
 
-  //Customer choice//
+//Customer choice//
 
-  function updateProducts (answers){
+function updateProducts(answers) {
 
     let sqlQueryUpdate = "SELECT * FROM products WHERE ?";
-    let productParams = [{item_id: answers.itemID}];
+    let productParams = [{ item_id: answers.itemID }];
 
-    connection.query(sqlQueryUpdate, productParams, function(error, results){
+    connection.query(sqlQueryUpdate, productParams, function (error, results) {
 
         let unitPrice = results[0].price;
 
@@ -109,19 +109,20 @@ updateProducts(answers);
             throw error;
         }
 
-       
+
         // console.log(answers.quantity);
 
-        if (results[0].stock_quantity < 0 || results[0].stock_quantity - answers.quantity < 0 ){
-
+        if (results[0].stock_quantity < 0 || results[0].stock_quantity - answers.quantity < 0) {
+            console.log(" ");
             console.log("Insufficient Quantity!! Please try another product");
+            console.log(" ");
             askQuestions();
         }
 
-        else{
+        else {
 
 
-            connection.query("UPDATE products SET ? WHERE ?", [{stock_quantity: results[0].stock_quantity - answers.quantity}, {item_id: answers.itemID}], function(error, results){
+            connection.query("UPDATE products SET ? WHERE ?", [{ stock_quantity: results[0].stock_quantity - answers.quantity }, { item_id: answers.itemID }], function (error, results) {
 
                 if (error) {
 
@@ -130,11 +131,13 @@ updateProducts(answers);
 
                 // console.log("in stock");
 
-               
-                let orderTotal = answers.quantity * unitPrice;
-                console.log(`Thank you for your order! Your total is: $ ${(Math.floor(orderTotal * 100) / 100 )}`)
 
-                connection.end();
+                let orderTotal = answers.quantity * unitPrice;
+                console.log(" ");
+                console.log(`Thank you for your order! Your total is: $ ${(Math.floor(orderTotal * 100) / 100)}`)
+                console.log(" ");
+                anotherPurchase();
+                // connection.end();
 
             })
         }
@@ -145,40 +148,52 @@ updateProducts(answers);
 
 
 
-  }
+}
 
-//   function anotherPurchase(){
+function anotherPurchase() {
 
-//     inquirer
-//     .prompt([
-//         {
-//             type: "list",
-//             name: "newOrder",
-//             message: "Would you like to order another item?",
-//             choices: ["yes", "no"]
-//         },
-      
-
-
-//     ])
-//     .then(answers => {
-       
-// // console.log(answers);
-
-// updateProducts(answers);
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "newOrder",
+                message: "Would you like to order another item?",
+                choices: ["Yes", "No"]
+            },
 
 
 
+        ])
+        .then(answers => {
+
+
+
+         
+
+            if (answers.newOrder === "Yes"){
+
+            askQuestions();
+
+            }
+
+            else {
+
+                console.log(" ");
+                console.log(" Thank you for shopping with Bamazon today!")
+
+                connection.end();
+            }
 
 
 
 
 
 
-//     })
+
+        })
 
 
-//   }
+}
 
   //Check inventory//
 
