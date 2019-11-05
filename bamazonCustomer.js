@@ -77,7 +77,7 @@ inquirer
     ])
     .then(answers => {
        
-console.log(answers);
+// console.log(answers);
 
 updateProducts(answers);
 
@@ -87,7 +87,11 @@ updateProducts(answers);
 
 
 
-    })};
+
+
+    })
+   
+};
 
   //Customer choice//
 
@@ -98,17 +102,20 @@ updateProducts(answers);
 
     connection.query(sqlQueryUpdate, productParams, function(error, results){
 
+        let unitPrice = results[0].price;
+
         if (error) {
 
             throw error;
         }
 
-        // console.log(results[0].stock_quantity);
+       
         // console.log(answers.quantity);
 
         if (results[0].stock_quantity < 0 || results[0].stock_quantity - answers.quantity < 0 ){
 
-            console.log("Insufficient Quantity!!")
+            console.log("Insufficient Quantity!! Please try another product");
+            askQuestions();
         }
 
         else{
@@ -121,7 +128,13 @@ updateProducts(answers);
                     throw error;
                 }
 
-                console.log("in stock");
+                // console.log("in stock");
+
+               
+                let orderTotal = answers.quantity * unitPrice;
+                console.log(`Thank you for your order! Your total is: $ ${(Math.floor(orderTotal * 100) / 100 )}`)
+
+                connection.end();
 
             })
         }
@@ -130,10 +143,42 @@ updateProducts(answers);
     })
 
 
-// connection.end();
+
 
   }
 
+//   function anotherPurchase(){
+
+//     inquirer
+//     .prompt([
+//         {
+//             type: "list",
+//             name: "newOrder",
+//             message: "Would you like to order another item?",
+//             choices: ["yes", "no"]
+//         },
+      
+
+
+//     ])
+//     .then(answers => {
+       
+// // console.log(answers);
+
+// updateProducts(answers);
+
+
+
+
+
+
+
+
+
+//     })
+
+
+//   }
 
   //Check inventory//
 
@@ -167,3 +212,5 @@ updateProducts(answers);
 
 
   //Display to customer cost of order//
+
+  //Purchase another item//
