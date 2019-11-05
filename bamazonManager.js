@@ -58,7 +58,7 @@ function askManager() {
 
 
                 case "Add to Inventory":
-
+                    updateInventory();
                     break;
 
 
@@ -150,3 +150,63 @@ function lowInventory() {
 
 }
 
+function updateInventory() {
+
+
+
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "itemID",
+                message: "Please enter the ID item of the product you would like to add more inventory of"
+            },
+
+            {
+                type: "input",
+                name: "quantity",
+                message: "Please enter the amount you on inventory you would like to add"
+            },
+
+
+        ])
+        .then(answers => {
+
+
+            let sqlQueryUpdate = "SELECT * FROM products WHERE ?";
+            let productParams = [{ item_id: answers.itemID }];
+
+            connection.query(sqlQueryUpdate, productParams, function (error, results) {
+
+                let oldInv = results[0].stock_quantity;
+               
+
+                if (error) {
+
+                    throw error;
+                }
+
+
+                connection.query("UPDATE products SET ? WHERE ?", [{ stock_quantity: parseInt(answers.quantity) + oldInv }, { item_id: answers.itemID }], function (error, results) {
+
+                    if (error) {
+
+                        throw error;
+                    }
+
+                    console.log(results);
+
+
+
+
+
+
+
+
+
+
+                })
+            })
+        })
+
+}
