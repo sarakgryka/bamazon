@@ -36,7 +36,7 @@ If they select the first option they will see all the products below.
 
 If they select the second option, they will see a report of low inventory. The report shows all items with stock less than 5. 
 
-![customer](./pics/manageroption2.PNG)
+![customer](./pics/managerOption2.PNG)
 
 If the third option is selected, the manager will be able to add inventory to an existing item.
 
@@ -52,7 +52,7 @@ If the forth option is chosen, the manager will be able to add a new item to inv
 
 The table will update with the new item as well.
 
-![customer](./pics/managerTableAddItem.PNG)
+![customer](./pics/manager\table\add\item.PNG)
 
 Below is a video of the application in action as well! 
 
