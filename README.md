@@ -32,7 +32,7 @@ Next we will look at the manager interface, below is what the manager will see w
 
 If they select the first option they will see all the products below. 
 
-![customer](./pics/manager option1.PNG)
+![customer](./pics/managerOption1.PNG)
 
 If they select the second option, they will see a report of low inventory. The report shows all items with stock less than 5. 
 
@@ -40,19 +40,19 @@ If they select the second option, they will see a report of low inventory. The r
 
 If the third option is selected, the manager will be able to add inventory to an existing item.
 
-![customer](./pics/manager option3.PNG)
+![customer](./pics/managerOption3.PNG)
 
 The table is also updated with the inventory adjustment.
 
-![customer](./pics/manager inv ads.PNG)
+![customer](./pics/managerInvAds.PNG)
 
 If the forth option is chosen, the manager will be able to add a new item to inventory. It will prompt them with questions about the item. 
 
-![customer](./pics/manager add item.PNG)
+![customer](./pics/managerAddItem.PNG)
 
 The table will update with the new item as well.
 
-![customer](./pics/manager table add item.PNG)
+![customer](./pics/managerTableAddItem.PNG)
 
 Below is a video of the application in action as well! 
 
