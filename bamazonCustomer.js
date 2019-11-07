@@ -18,7 +18,7 @@ connection.connect(function (error) {
         throw error;
     }
 
-    console.log(`successfully connected as id ${connection.threadId}`);
+    // console.log(`successfully connected as id ${connection.threadId}`);
 
     showProducts();
 })

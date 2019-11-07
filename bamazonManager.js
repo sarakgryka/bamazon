@@ -18,7 +18,7 @@ connection.connect(function (error) {
         throw error;
     }
 
-    console.log(`successfully connected as id ${connection.threadId}`);
+    // console.log(`successfully connected as id ${connection.threadId}`);
     askManager();
 
 })
@@ -247,11 +247,11 @@ function addInventory() {
                 }
 
                 console.log(`The following product has been added!  ${newProduct.product_name}`);
-
+                connection.end();
 
 
             })
-            connection.end();
+         
         })
 
 
