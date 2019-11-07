@@ -1,4 +1,4 @@
-# Bamazon Marketplace#
+# Bamazon Marketplace
 
 The Bamazon Marketplace is a command line application that uses MySQL to track products and inventory. There is a customer facing application as well as a manager application. 
 
@@ -52,7 +52,7 @@ If the forth option is chosen, the manager will be able to add a new item to inv
 
 The table will update with the new item as well.
 
-![customer](./pics/manager\table\add\item.PNG)
+![customer](./pics/managerTableAddItem.PNG)
 
 Below is a video of the application in action as well! 
 
