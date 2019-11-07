@@ -19,11 +19,13 @@ connection.connect(function (error) {
     }
 
     console.log(`successfully connected as id ${connection.threadId}`);
+
+    showProducts();
 })
 
 //Display the item options to customer//
 
-showProducts();
+
 function showProducts() {
 
     let sqlQuery = "SELECT * FROM products";
@@ -56,19 +58,17 @@ function showProducts() {
 }
 
 
-
-
 // call to inquirer to prompt messages to customer//
 function askQuestions() {
     inquirer
         .prompt([
             {
-                type: "inpt",
+                type: "input",
                 name: "itemID",
                 message: "Please enter the ID item of the product you would like to order"
             },
             {
-                type: "inpt",
+                type: "input",
                 name: "quantity",
                 message: "Please enter the quantity you would like to order"
             },
@@ -80,14 +80,6 @@ function askQuestions() {
             // console.log(answers);
 
             updateProducts(answers);
-
-
-
-
-
-
-
-
 
         })
 
@@ -108,7 +100,6 @@ function updateProducts(answers) {
 
             throw error;
         }
-
 
         // console.log(answers.quantity);
 
@@ -134,7 +125,7 @@ function updateProducts(answers) {
 
                 let orderTotal = answers.quantity * unitPrice;
                 console.log(" ");
-                console.log(`Thank you for your order! Your total is: $ ${(Math.floor(orderTotal * 100) / 100)}`)
+                console.log(`Thank you for your order! Your total is: $ ${orderTotal.toFixed(2)}`)
                 console.log(" ");
                 anotherPurchase();
                 // connection.end();
@@ -168,11 +159,11 @@ function anotherPurchase() {
 
 
 
-         
 
-            if (answers.newOrder === "Yes"){
 
-            askQuestions();
+            if (answers.newOrder === "Yes") {
+
+                askQuestions();
 
             }
 
