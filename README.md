@@ -2,7 +2,7 @@
 
 The Bamazon Marketplace is a command line application that uses MySQL to track products and inventory. There is a customer facing application as well as a manager application. 
 
-Below is a picture of the starting table an inventory 
+Below is a picture of the starting table and inventory.
 
 ![table](./pics/table.PNG)
 
